@@ -12,7 +12,7 @@ const pool = new Pool({
 const fetch = async (query, ...params) => {
     const client = await pool.connect()
     try {
-        const { rows: [row] } = client.query(query, params.length ? params : null)
+        const { rows: [row] } = await client.query(query, params.length ? params : null)
         return row
     } catch (error) {
         console.log(error)
@@ -24,7 +24,7 @@ const fetch = async (query, ...params) => {
 const fetchAll = async (query, ...params) => {
     const client = await pool.connect()
     try {
-        const { rows } = client.query(query, params.length ? params : null)
+        const { rows } = await client.query(query, params.length ? params : null)
         return rows
     } catch (error) {
         console.log(error)
@@ -33,7 +33,7 @@ const fetchAll = async (query, ...params) => {
     }
 }
 
-export default {
+export {
     fetch,
     fetchAll
 }
